@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MathVerse</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0,#173d75 0,transparent 30%),radial-gradient(circle at 90% 10%,#471b67 0,transparent 28%),linear-gradient(135deg,#050a13,#091426 60%,#060d18);color:#f5f8ff;min-height:100vh}
+header{height:78px;background:rgba(5,12,24,.94);backdrop-filter:blur(15px);border-bottom:1px solid #24415f;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:50}.logo{font-size:29px;font-weight:950;background:linear-gradient(90deg,#55e6ff,#4da3ff,#9a72ff);-webkit-background-clip:text;color:transparent}.nav{display:flex;gap:8px}.nav button,.account{border:1px solid transparent;background:transparent;color:#afc2da;padding:11px 16px;border-radius:11px;font-weight:800;cursor:pointer}.nav button:hover,.account:hover{background:#142943;border-color:#2a4c70;color:white}
+main{max-width:1240px;margin:32px auto;padding:0 24px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(135deg,#102642,#0d1b31);border:1px solid #294c70;border-radius:24px;padding:38px;box-shadow:0 20px 70px #0006}.hero h1{font-size:43px;margin:0 0 8px}.hero p{color:#9db0c8;margin:0}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0}.stat{background:linear-gradient(145deg,#0e2037,#0a1728);border:1px solid #234260;border-radius:17px;padding:19px}.stat span{color:#8ea6c1;font-size:12px;font-weight:800;text-transform:uppercase}.stat b{display:block;font-size:27px;margin-top:6px}.section-title{margin-top:28px}.section-title h2{margin:0}.section-title p{color:#7188a3}.levels,.games,.shop{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}.level,.game,.upgrade{background:linear-gradient(145deg,#0d1d31,#0a1626);border:1px solid #223f5d;border-radius:18px;padding:21px;box-shadow:0 10px 30px #0003}.level:hover,.game:hover,.upgrade:hover{border-color:#4075a8;transform:translateY(-2px)}.level p,.game p,.upgrade p{color:#91a6c0}.level button,.game button,.primary{border:0;background:linear-gradient(135deg,#4da3ff,#7668ff);color:white;padding:11px 16px;border-radius:10px;font-weight:850;cursor:pointer}.game-icon{font-size:42px}.tag{display:inline-block;color:#63ddff;background:#12314c;border:1px solid #225578;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:800}.panel{background:linear-gradient(145deg,#0d1d31,#091625);border:1px solid #294764;border-radius:22px;padding:25px;box-shadow:0 18px 60px #0005}.topline{display:flex;justify-content:space-between;align-items:center}.close{border:1px solid #29435f;background:#13243a;color:#c5d4e6;border-radius:9px;padding:9px 12px;cursor:pointer;font-weight:800}.question{font-size:45px;font-weight:950;text-align:center;margin:24px 0}.answer{display:flex;gap:10px;justify-content:center}.answer input,.auth input{font-size:18px;padding:13px;background:#081423;color:white;border:1px solid #2b4967;border-radius:10px}.answer input{width:180px}.feedback{text-align:center;min-height:28px;margin:14px;font-weight:800}.muted,.controls{color:#8da3bd}
+.raceWrap{max-width:950px;margin:auto}.raceHud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#081321;border:1px solid #274662;border-radius:14px;padding:12px;margin-bottom:12px}.raceHud b{color:#62ddff}.race{height:480px;position:relative;overflow:hidden;border-radius:18px;border:2px solid #41617d;background:#607080;box-shadow:0 20px 60px #0008}.sky{position:absolute;inset:0 0 42%;background:linear-gradient(#62b8ed,#d7f1ff 70%,#a8c98d)}.mountain{position:absolute;bottom:39%;left:0;width:100%;height:100px;background:linear-gradient(135deg,transparent 30%,#526b70 31%,#526b70 44%,transparent 45%),linear-gradient(25deg,transparent 43%,#687f83 44%,#687f83 60%,transparent 61%)}.road3d{position:absolute;left:12%;right:12%;top:34%;bottom:0;background:#3b4148;clip-path:polygon(34% 0,66% 0,100% 100%,0 100%)}.road3d:before,.road3d:after{content:"";position:absolute;top:-20%;bottom:-10%;width:9px;background:repeating-linear-gradient(to bottom,#f8df63 0 35px,transparent 35px 75px);animation:lane .45s linear infinite}.road3d:before{left:32%}.road3d:after{right:32%}@keyframes lane{to{transform:translateY(80px)}}.shoulder{position:absolute;top:34%;bottom:0;width:12%;background:#668b50}.shoulder.left{left:0}.shoulder.right{right:0}
+.playerCar{position:absolute;z-index:8;bottom:25px;left:50%;width:118px;height:165px;transform:translateX(-50%);filter:drop-shadow(0 13px 8px #0008)}.beetleBody{position:absolute;inset:5px 10px 0;border-radius:46% 46% 30% 30%;background:linear-gradient(90deg,#0b62c6,#58b9ff 45%,#0752a9);border:3px solid #092f63}.beetleRoof{position:absolute;left:24px;top:19px;width:70px;height:61px;border-radius:50% 50% 35% 35%;background:#0b2441;border:4px solid #79cfff}.beetleGlass{position:absolute;left:31px;top:27px;width:56px;height:42px;border-radius:45% 45% 30% 30%;background:linear-gradient(135deg,#d9f5ff,#4683a8)}.headlight{position:absolute;width:17px;height:12px;border-radius:50%;background:#fff5a8;top:96px;box-shadow:0 0 12px #fff4a8}.headlight.l{left:17px}.headlight.r{right:17px}.wheel{position:absolute;width:18px;height:43px;background:#090d12;border-radius:9px;top:80px}.wheel.l{left:0}.wheel.r{right:0}.traffic{position:absolute;z-index:6;width:70px;height:105px;border-radius:24px 24px 12px 12px;background:#e64b59;border:3px solid #8d2530;box-shadow:0 8px 12px #0007}.traffic:before{content:"";position:absolute;left:12px;top:15px;width:40px;height:32px;background:#a8d8e8;border-radius:12px}.traffic:after{content:"";position:absolute;left:7px;bottom:12px;width:9px;height:19px;background:#10151b;box-shadow:47px 0 #10151b}.auth{max-width:440px;margin:30px auto}.auth input{display:block;width:100%;margin:10px 0}.auth button{width:100%;margin-top:8px}.popup{position:fixed;right:20px;bottom:20px;background:#10233a;border:1px solid #315476;border-radius:15px;padding:18px;box-shadow:0 15px 50px #0008;display:none;z-index:100;max-width:310px}.robot{display:none;text-align:center;background:#10233a;border:1px solid #315476;border-radius:15px;padding:25px;max-width:420px;margin:30px auto}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.levels,.games,.shop{grid-template-columns:1fr 1fr}}@media(max-width:540px){.nav button{padding:8px}.levels,.games,.shop{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.race{height:390px}.question{font-size:34px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">MathVerse</div>
+<div class="nav">
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('games')">Games</button><button onclick="showPage('garage')">Garage</button>
+<button class="account" onclick="showAuth()">Sign in</button>
+</div>
+</header>
+
+<main>
+<section id="dashboard" class="page active">
+<div class="hero"><h1>MathVerse</h1><p>Practice your times tables, level up and play different games.</p></div>
+<div class="stats">
+<div class="stat">🔥 Streak<b id="streak">0</b></div>
+<div class="stat">🏆 Best Score<b id="best">0</b></div>
+<div class="stat">🎮 Wins<b id="wins">0</b></div>
+<div class="stat">⭐ Level<b id="level">1</b></div>
+</div>
+<h2>Levels</h2>
+<div class="levels" id="levels"></div>
+</section>
+
+<section id="games" class="page">
+<div class="hero"><h1>Games</h1><p>Pick a game and start playing.</p></div>
+<div class="games">
+<div class="game"><div class="game-icon">🚪</div><span class="tag">Quick maths</span><h3>Math Escape</h3><p>Answer before the timer runs out.</p><button onclick="startEscape()">Play</button></div>
+<div class="game"><div class="game-icon">⌨️</div><span class="tag">Keyboard</span><h3>Keyboard Rush</h3><p>Get as many answers right as you can.</p><button onclick="startRush()">Play</button></div>
+<div class="game"><div class="game-icon">🏎️</div><span class="tag">Racing</span><h3>Math Racer</h3><p>Drive, dodge traffic and answer in 6 seconds.</p><button onclick="startRacer()">Play</button></div>
+<div class="game"><div class="game-icon">🧱</div><span class="tag">Build</span><h3>Build It</h3><p>Answer questions to build your tower.</p><button onclick="startBuild()">Play</button></div>
+</div>
+</section>
+
+<section id="garage" class="page"><div class="hero"><h1>🏁 Garage</h1><p>Earn cash from correct answers and upgrade your blue Volkswagen Beetle.</p></div><div class="stats"><div class="stat"><span>Cash</span><b>$<span id="cash">0</span></b></div><div class="stat"><span>Top Speed</span><b><span id="speedStat">120</span> km/h</b></div><div class="stat"><span>Engine</span><b>Level <span id="engineStat">1</span></b></div><div class="stat"><span>Turbo</span><b>Level <span id="turboStat">1</span></b></div><div class="stat"><span>Handling</span><b>Level <span id="handlingStat">1</span></b></div></div><div class="shop"><div class="upgrade"><h3>⚡ Engine</h3><p>Increase maximum speed.</p><b id="enginePrice">$250</b><br><button class="primary" onclick="upgradeEngine()">Upgrade</button></div><div class="upgrade"><h3>🚀 Turbo</h3><p>Increase acceleration.</p><b id="turboPrice">$400</b><br><button class="primary" onclick="upgradeTurbo()">Upgrade</button></div><div class="upgrade"><h3>🛞 Handling</h3><p>Make steering more responsive.</p><b id="handlingPrice">$300</b><br><button class="primary" onclick="upgradeHandling()">Upgrade</button></div></div></section><section id="auth" class="page">
+<div class="panel auth">
+<h2>Sign in</h2><p class="muted">This saves your progress on this computer.</p>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button class="primary" onclick="signIn()">Sign in</button>
+<button class="close" onclick="showPage('dashboard')">Back</button>
+<p id="authMsg"></p>
+</div>
+</section>
+
+<section id="gamePanel" class="page">
+<div class="panel">
+<div class="topline"><h2 id="gameTitle">Game</h2><button class="close" onclick="closeGame()">✕ Close</button></div>
+<div id="gameArea"></div>
+</div>
+</section>
+
+<section id="robot" class="robot">
+<h2>🤖 Quick check</h2><p>Just confirm you're not a robot.</p>
+<label><input type="checkbox" id="robotBox" onchange="verifyRobot()"> I'm not a robot</label>
+</section>
+</main>
+
+<div id="popup" class="popup"><b>Save your progress?</b><p>Sign in to keep your score and streak on this computer.</p><button onclick="showAuth();closePopup()">Sign in</button><button onclick="closePopup()">Never ask again</button></div>
+
+<script>
+let data=JSON.parse(localStorage.getItem('mathverseData')||'{"streak":0,"best":0,"wins":0,"level":1,"cash":0,"engine":1,"turbo":1,"handling":1}');data.cash=data.cash||0;data.engine=data.engine||1;data.turbo=data.turbo||1;data.handling=data.handling||1;
+let timer=null,mode="",score=0,streak=0,question=0,raceRunning=false,raceTime=6,playerX=50,enemies=[],keys={};
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem('mathverseData',JSON.stringify(data));updateStats()}function upgradeEngine(){let c=250*data.engine;if(data.cash<c)return alert('You need $'+c);data.cash-=c;data.engine++;save()}function upgradeTurbo(){let c=400*data.turbo;if(data.cash<c)return alert('You need $'+c);data.cash-=c;data.turbo++;save()}function upgradeHandling(){let c=300*data.handling;if(data.cash<c)return alert('You need $'+c);data.cash-=c;data.handling++;save()}
+function updateStats(){ $('streak').textContent=data.streak;$('best').textContent=data.best;$('wins').textContent=data.wins;$('level').textContent=data.level;if($('cash'))$('cash').textContent=data.cash;if($('speedStat'))$('speedStat').textContent=120+(data.engine-1)*18+(data.turbo-1)*10;if($('engineStat'))$('engineStat').textContent=data.engine;if($('turboStat'))$('turboStat').textContent=data.turbo;if($('handlingStat'))$('handlingStat').textContent=data.handling;if($('enginePrice'))$('enginePrice').textContent='$'+250*data.engine;if($('turboPrice'))$('turboPrice').textContent='$'+400*data.turbo;if($('handlingPrice'))$('handlingPrice').textContent='$'+300*data.handling }
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');if(id==='dashboard')renderLevels()}
+function showAuth(){showPage('auth')}
+function closeGame(){stopRace();clearInterval(timer);showPage('games')}
+function renderLevels(){let s='';for(let i=1;i<=12;i++)s+=`<div class="level"><h3>Level ${i}</h3><p>Times tables ×${i}</p><button onclick="startLevel(${i})">Practice</button></div>`;$('levels').innerHTML=s;updateStats()}
+function startLevel(n){data.level=n;save();startEscape(n)}
+function rnd(n){return Math.floor(Math.random()*n)+1}
+function makeQ(){let a=rnd(12),b=rnd(12);return [a,b,a*b]}
+function beep(ok){try{let c=new AudioContext(),o=c.createOscillator(),g=c.createGain();o.frequency.value=ok?700:180;g.gain.value=.06;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.12)}catch(e){}}
+function gameHeader(extra=''){return `<div class="muted">${extra}</div><div class="question" id="q"></div><div class="answer"><input id="ans" inputmode="numeric" autocomplete="off"><button class="primary" onclick="submitAnswer()">Answer</button></div><div class="feedback" id="fb"></div>`}
+function nextQ(){let q=makeQ();question=q[2];$('q').textContent=`${q[0]} × ${q[1]} = ?`;let a=$('ans');a.value='';a.focus()}
+function submitAnswer(){let v=Number($('ans').value),fb=$('fb');if(v===question){score++;streak++;data.streak=streak;data.cash+=25+Math.min(score,20)*2;if(score>data.best){data.best=score}beep(true);fb.textContent='✅ Correct! +$'+(25+Math.min(score,20)*2);nextQ()}else{streak=0;data.streak=0;beep(false);fb.textContent='❌ Not quite — try the next one';nextQ()}save()}
+function startEscape(){stopRace();mode='escape';score=0;streak=0;showPage('gamePanel');$('gameTitle').textContent='🚪 Math Escape';$('gameArea').innerHTML=gameHeader('60 seconds — answer as many as you can.');nextQ();let t=60;clearInterval(timer);timer=setInterval(()=>{t--;let h=document.querySelector('#gameArea .muted');if(h)h.textContent=`${t} seconds left — Score: ${score}`;if(t<=0){clearInterval(timer);data.wins++;save();$('fb').textContent=`🏁 Time! Score: ${score}`}},1000)}
+function startRush(){stopRace();mode='rush';score=0;streak=0;showPage('gamePanel');$('gameTitle').textContent='⌨️ Keyboard Rush';$('gameArea').innerHTML=gameHeader('30 seconds — use Enter to submit.');nextQ();clearInterval(timer);let t=30;timer=setInterval(()=>{t--;let h=document.querySelector('#gameArea .muted');if(h)h.textContent=`${t} seconds left — Score: ${score}`;if(t<=0){clearInterval(timer);data.wins++;save();$('fb').textContent=`🏁 Finished! Score: ${score}`}},1000)}
+document.addEventListener('keydown',e=>{if((mode==='rush'||mode==='escape')&&e.key==='Enter'){e.preventDefault();submitAnswer()}if(mode==='racer'&&raceRunning&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();keys[e.key]=true}});
+document.addEventListener('keyup',e=>{if(mode==='racer'&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))keys[e.key]=false});
+function startRacer(){clearInterval(timer);mode='racer';score=0;streak=0;raceRunning=true;playerX=50;enemies=[];showPage('gamePanel');$('gameTitle').textContent='🏎️ Highway Rush';$('gameArea').innerHTML=`<div class="raceWrap"><div class="raceHud"><span>💰 Cash: <b id="raceCash">${data.cash}</b></span><span>🏁 Speed: <b id="raceSpeed">0</b> km/h</span><span>⏱️ <b id="raceTimeHud">6.0</b>s</span><span>Score: <b id="raceScore">0</b></span></div><div class="race" id="track"><div class="sky"></div><div class="mountain"></div><div class="shoulder left"></div><div class="shoulder right"></div><div class="road3d"></div><div class="playerCar" id="player"><div class="beetleBody"></div><div class="beetleRoof"></div><div class="beetleGlass"></div><div class="headlight l"></div><div class="headlight r"></div><div class="wheel l"></div><div class="wheel r"></div></div></div><div class="controls">⬅️ ➡️ Arrow keys steer your Volkswagen Beetle • Dodge traffic • Answer within 6 seconds</div><div class="question" id="rq"></div><div class="answer"><input id="rAns" inputmode="numeric"><button class="primary" onclick="raceAnswer()">Answer</button></div><div class="feedback" id="rfb"></div></div>`;nextRaceQ();raceLoop();spawnEnemy();timer=setInterval(()=>{if(!raceRunning)return;raceTime-=.1;if($('raceTimeHud'))$('raceTimeHud').textContent=Math.max(0,raceTime).toFixed(1);if(raceTime<=0)finishRace('⏰ Too slow! You are out!')},100)}
+function nextRaceQ(){let q=makeQ();question=q[2];raceTime=6;$('rq').textContent=`${q[0]} × ${q[1]} = ?`;let a=$('rAns');a.value='';a.focus()}
+function raceAnswer(){if(!raceRunning)return;let v=Number($('rAns').value);if(v===question){score++;streak++;data.streak=streak;data.cash+=25+Math.min(score,20)*2;data.best=Math.max(data.best,score);beep(true);$('rfb').textContent='✅ Correct — keep racing!';nextRaceQ();save()}else finishRace('💥 Wrong answer! Race over.')}
+function spawnEnemy(){if(!raceRunning)return;let el=document.createElement('div');el.className='traffic';let lane=[35,50,65][rnd(3)-1];el.style.left=`calc(${lane}% - 35px)`;el.style.top='-120px';$('track').appendChild(el);enemies.push({el,y:-120,x:lane});setTimeout(spawnEnemy,700+Math.random()*900)}
+function raceLoop(){if(!raceRunning)return;let p=$('player'),move=.75+data.handling*.12;if(keys.ArrowLeft)playerX-=move;if(keys.ArrowRight)playerX+=move;playerX=Math.max(28,Math.min(72,playerX));p.style.left=`calc(${playerX}% - 59px)`;let speed=85+data.engine*10+data.turbo*7;if($('raceSpeed'))$('raceSpeed').textContent=Math.round(speed);enemies.forEach(o=>{o.y+=2.6+data.turbo*.35;o.el.style.top=o.y+'px';let scale=.55+Math.max(0,Math.min(1,(o.y+120)/600))*.65;o.el.style.transform=`scale(${scale})`;if(o.y>500){o.el.remove();o.dead=true}if(o.y>300&&o.y<440&&Math.abs(o.x-playerX)<8)finishRace('💥 CRASH! You hit traffic.')});enemies=enemies.filter(o=>!o.dead);if($('raceScore'))$('raceScore').textContent=score;requestAnimationFrame(raceLoop)}
+function finishRace(msg){if(!raceRunning)return;raceRunning=false;clearInterval(timer);data.wins++;data.streak=0;save();$('rfb').textContent=`${msg} Score: ${score}`}
+function stopRace(){raceRunning=false;clearInterval(timer);enemies.forEach(o=>o.el?.remove());enemies=[]}
+function startBuild(){stopRace();clearInterval(timer);mode='build';score=0;showPage('gamePanel');$('gameTitle').textContent='🧱 Build It';$('gameArea').innerHTML=`<div style="text-align:center"><p>Get answers right to build your tower.</p><div id="tower" style="font-size:52px;min-height:250px;padding:10px"></div></div>`+gameHeader('Build as high as possible!');nextBuild()}
+function nextBuild(){let q=makeQ();question=q[2];$('q').textContent=`${q[0]} × ${q[1]} = ?`;let a=$('ans');a.value='';a.focus()}
+function buildAnswer(){let v=Number($('ans').value);if(v===question){score++;data.best=Math.max(data.best,score);data.cash+=35;$('tower').textContent+='🧱';$('fb').textContent='✅ +1 block!';beep(true);nextBuild();save()}else{$('fb').textContent='❌ Try the next block';beep(false);nextBuild()}}
+function signIn(){let u=$('username').value.trim();if(!u){$('authMsg').textContent='Enter a username.';return}localStorage.setItem('mathverseUser',u);$('authMsg').textContent=`Welcome, ${u}!`;setTimeout(()=>showPage('dashboard'),600)}
+function closePopup(){$('popup').style.display='none';localStorage.setItem('popupOff','1')}
+function verifyRobot(){if($('robotBox').checked){$('robot').innerHTML='<h2>✅ Verified!</h2><p>You can continue playing.</p>';setTimeout(()=>{$('robot').style.display='none'},900)}}
+function maybePop(){if(!localStorage.getItem('popupOff')&&Math.random()<.35)setTimeout(()=>$('popup').style.display='block',2500)}
+renderLevels();maybePop();updateStats();
+</script>
+</body>
+</html>
